@@ -8,9 +8,7 @@ from selenium.webdriver.chrome.service import Service;
 from selenium.webdriver.support.ui import WebDriverWait;
 from selenium.webdriver.support import expected_conditions as EC;
 from datetime import datetime;
-from dotenv import load_dotenv;
 
-load_dotenv();
 chromedriver = os.getenv("CHROME_DRIVER");
 
 options = webdriver.ChromeOptions();
