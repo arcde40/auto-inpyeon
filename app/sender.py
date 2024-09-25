@@ -24,7 +24,7 @@ def senderRetry(content, p_name, p_birth_year, p_birth_month, p_birth_day, index
         ret = sender_with_title(content, p_name, p_birth_year, p_birth_month, p_birth_day, index);
         if ret == 0:
             return 0;
-        logging.info("Failed to send letter.. Retrying");
+        logging.warning(f"Failed to send letter.. Retrying ({i}/3)");
     return -1;
 
 
@@ -58,8 +58,12 @@ def sender(title, content, p_name, p_birth_year, p_birth_month, p_birth_date):
 
         logging.info("훈련병 찾기 버튼 클릭 성공");
 
-        # Popup
-        wd.switch_to.window(wd.window_handles[1]);
+        try:
+            # Popup
+            wd.switch_to.window(wd.window_handles[1]);
+        except Exception as e:
+            logging.error("팝업이 출력되지 않았습니다!");
+            raise Exception;
 
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="emailPic-container"]/ul/li/input')));

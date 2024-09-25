@@ -98,8 +98,17 @@ def weather_crawl():
               'ny': '76'}; # x=81 y=76 진주시 금산면 (From API Manual)
 
     response = requests.get(url, params=params);
+
+    if response.status_code != 200:
+        logging.error(f"기상청 API에 연결하는데 실패하였습니다: '{response.text}' ({response.status_code})")
+        return "";
+
     xml_data = response.text;
     dict_data = xmltodict.parse(xml_data);
+
+    if 'response' not in dict_data:
+        logging.error(f"기상청 API에 연결하는데 실패하였습니다: '{dict_data}'")
+        return "";
 
     date = util.get_tomorrow_date_string();
 
@@ -174,15 +183,18 @@ def news_entertain_crawl():
 def news_crawl(crawl_category = [100, 101, 102, 104, 105, 106, 109, 107, 108]):
     content = [];
     for i in crawl_category:
-        match i:
-            case 106: # sports
-                content.append(news_sport_crawl());
-            case 107: # premier league ranking
-                content.append(news_sport_football_ranking_crawl());
-            case 108: # weather
-                content.append(weather_crawl());
-            case 109: # entertain
-                content.append(news_entertain_crawl());
-            case _:
-                content.append(news_connect(i));
+        try:
+            match i:
+                case 106: # sports
+                    content.append(news_sport_crawl());
+                case 107: # premier league ranking
+                    content.append(news_sport_football_ranking_crawl());
+                case 108: # weather
+                    content.append(weather_crawl());
+                case 109: # entertain
+                    content.append(news_entertain_crawl());
+                case _:
+                    content.append(news_connect(i));
+        except Exception as e:
+            logging.error(f"News Crawling Failed: {i} - {e}")
     return ' // \n'.join(content);
