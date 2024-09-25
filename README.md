@@ -4,7 +4,7 @@ Simple python program that scraps news and sends it through ROKAF website
 ## How to Run
 receiver.txt 파일에 수신자를 '이름/생년/월/일' 형태로 넣어주세요. 여러 줄에 걸쳐 다수의 수신자를 지정할 수도 있습니다. # 붙여 주석 처리할 수 있습니다.
 
-기상청 예보 기능을 사용하기 위해선 기상청 Open AI API Key가 필요합니다.
+기상청 예보 기능을 사용하기 위해선 기상청 Open API Key가 필요합니다.
 ### Docker
 Docker을 이용해 쉽게 배포할 수 있습니다. 이 방법을 사용 시 Build 과정에서 자동으로 최신 버전의 Chrome Driver을 다운로드합니다.
 
