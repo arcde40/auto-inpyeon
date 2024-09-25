@@ -19,10 +19,17 @@ def run():
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout));
 
     if logpath:
-        file_handler = logging.FileHandler(os.path.join(logpath, now_string + '.log'));
-        file_handler.setLevel(logging.WARNING);
-        file_handler.setFormatter(logging.Formatter(fmt='[%(module)s:%(lineno)d] %(asctime)s %(levelname)s\t %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p'))
+        log_formatter = logging.Formatter(fmt='[%(module)s:%(lineno)d] %(asctime)s %(levelname)s\t %(message)s',
+                              datefmt='%m/%d/%Y %I:%M:%S %p');
+        file_handler = logging.FileHandler(os.path.join(os.path.join(logpath,'error'), now_string + '.log'));
+        file_handler.setLevel(logging.ERROR);
+        file_handler.setFormatter(log_formatter)
         logging.getLogger().addHandler(file_handler);
+
+        file_handler_info = logging.FileHandler(os.path.join(os.path.join(logpath,'info'), now_string + '.log'));
+        file_handler_info.setLevel(logging.INFO);
+        file_handler_info.setFormatter(log_formatter);
+        logging.getLogger().addHandler(file_handler_info);
 
     logging.info("Started: " + now_string);
 
