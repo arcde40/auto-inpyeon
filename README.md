@@ -24,4 +24,4 @@ WEATHER_API_KEY="<API KEY>"
 ```
 
 ## Disclaimer
-이 프로젝트는 보라매인편 (https://github.com/k4sud0n/borame-letter)의 소스코드를 참고하여 제작되었습니다.
+이 프로젝트는 [보라매인편(https://github.com/k4sud0n/borame-letter)](https://github.com/k4sud0n/borame-letter)의 소스코드를 참고하여 제작되었습니다.
